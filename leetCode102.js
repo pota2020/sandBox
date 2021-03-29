@@ -20,3 +20,4 @@
 const levelOrder = (root)=>(function rec(arr) {
         return arr.length === 0 ? [] : [arr.map(x => x.val), ...(rec(arr.flatMap(x => [x.left, x.right].filter(x => x))))];
     })(root ? [root] : [] );
+
