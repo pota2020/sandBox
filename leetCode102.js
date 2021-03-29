@@ -6,13 +6,17 @@
 //     this.right = (right === undefined ? null : right)
 // }
 
-const levelOrder = (root) => {
-    if (!root) return [];
-    return [
-        ...(function* rec(arr) {
-            if (arr.length === 0) return;
-            yield arr.map(x => x.val);
-            yield* rec([...arr.flatMap(x => [x.left, x.right].filter(x => x))]);
-        }([root]))
-    ];
-};
+// const levelOrder = (root) => {
+//     if (!root) return [];
+//     return [
+//         ...(function* rec(arr) {
+//             if (arr.length === 0) return;
+//             yield arr.map(x => x.val);
+//             yield* rec([...arr.flatMap(x => [x.left, x.right].filter(x => x))]);
+//         }([root]))
+//     ];
+// };
+
+const levelOrder = (root)=>(function rec(arr) {
+        return arr.length === 0 ? [] : [arr.map(x => x.val), ...(rec(arr.flatMap(x => [x.left, x.right].filter(x => x))))];
+    })(root ? [root] : [] );
